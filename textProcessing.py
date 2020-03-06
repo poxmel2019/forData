@@ -45,4 +45,24 @@ def op():
         if x == '\n': break
     f.close()
     
+def handle_new_file():
+
+    nums = []
+    new_file = open('2018.txt','r',encoding='utf-8')
+    f = new_file.readlines()
+
+    num = ''
+    for x in f:
+        for y in x:
+            num += y
+            if num.endswith('.'):
+                nums.append(num)
+                num = ''
+                break
+        if x == '\n': break
+        print(x)
+    print(nums)
+        
+    new_file.close()
+        
     
