@@ -56,7 +56,7 @@ def handle_new_file():
     num = ''
     for x in f:
         if x == '\n':break
-        new_file.write(x.strip())   
+        new_file.write(x)   
         print(x)
     #print(nums)
         
@@ -71,7 +71,96 @@ def open_read_close_file(some_file):
     f = file.readlines()
     for x in f:
         print(x,end='\n')
+def f():
     
+    word = '1. "Name of novel" - (author)'
+    string = '"Холодное сердце" - Вильгельм Гауф'
+    string3 = '1. Сообщение о моей смерти - Марк Твен (1)'
+    novel = ''
+    author = ''
+    #print(word)
+    #print(word.index('.'))
+    #print(word.index(' '))
+    #novel = word[word.index('"')+1:word.rindex('"')]
+    #author = word[word.index('(')+1:word.rindex(')')]
+    #novel2 =  string[string.index('"')+1:string.rindex('"')]
+    novel3 = string3[string3.index('.')+2:string3.index('-')]
+    novel3 = string3[string3.index('-')+2:string3.rindex('')]
+    #author2 = string[string.index('')+1:string.index('\n')]
     
+    #print(novel)
+    #print(author)
+    #print(novel2)
+    #print(author2)
+    print(novel3)
+
+def handle18():
+
+    file_address = '2018.txt'
+    file = open(file_address,'r',encoding='utf-8')
+    f = file.readlines()
+    for x in f:
+        if x == '\n': break
+        print(x[x.index('.')+2:x.index('-')])
         
+    file.close
+def handle17():
+
+    file_address = '2017.txt'
+    file = open(file_address,'r',encoding='utf-8')
+    f = file.readlines()
+    for x in f:
+        if x == '\n': break
+        print(x[x.index('"')+1:x.rindex('"')])
+        
+    file.close
+def handle16():
+
+    file_address = '2018.txt'
+    file = open(file_address,'r',encoding='utf-8')
+    f = file.readlines()
+    for x in f:
+        if x == '\n': break
+        print(x[x.index('"')+1:x.rindex('"')])
+        
+    file.close
+def handleText():
+
+    file_address = 'common_list.txt'
+    file = open(file_address,'r',encoding='utf-8')
+    new_file = open('common_text.txt','w',encoding='utf-8')
+    f = file.readlines()
+    #try:
+    for x in f:
+        if x == '\n': break
+        try:
+            print(x[x.index('"')+1:x.rindex('"')])
+            new_file.write(x[x.index('"')+1:x.rindex('"')]+'\n')
+        except ValueError:
+            print(x[x.index('.')+2:x.index('-')])
+            new_file.write(x[x.index('.')+2:x.index('-')]+'\n')
+    #file.close()
+    #except ValueError:
+    #    for x in f:
+    #        if x == '\n': break
+    #        print(x[x.index('.')+2:x.index('-')])
+    file.close()
+def handleCL2():
+
+    file_address = '2016.txt'
+    file = open(file_address,'r',encoding='utf-8')
+    f = file.readlines()
+    #try:
+    for x in f:
+        if x == '\n': break
+        try:
+            print(x[x.index('(')+1:x.rindex(')')])
+        except ValueError:
+            print(x[x.index('-')+2:x.rindex('')])
+    #file.close()
+    #except ValueError:
+    #    for x in f:
+    #        if x == '\n': break
+    #        print(x[x.index('.')+2:x.index('-')])
+    file.close()
     
