@@ -48,21 +48,30 @@ def op():
 def handle_new_file():
 
     nums = []
-    new_file = open('2018.txt','r',encoding='utf-8')
-    f = new_file.readlines()
+    file = open('2018.txt','r',encoding='utf-8')
+    new_file_address = 'compressList.txt'
+    new_file = open(new_file_address,'w',encoding='utf-8')
+    f = file.readlines()
 
     num = ''
     for x in f:
-        for y in x:
-            num += y
-            if num.endswith('.'):
-                nums.append(num)
-                num = ''
-                break
-        if x == '\n': break
+        if x == '\n':break
+        new_file.write(x.strip())   
         print(x)
-    print(nums)
+    #print(nums)
         
     new_file.close()
+    file.close()
+    open_read_close_file(new_file_address)
+    #print(new_file)
+    
+def open_read_close_file(some_file):
+
+    file = open(some_file,'r',encoding='utf-8')
+    f = file.readlines()
+    for x in f:
+        print(x,end='\n')
+    
+    
         
     
