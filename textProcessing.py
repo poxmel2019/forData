@@ -124,7 +124,7 @@ def handle16():
         print(x[x.index('"')+1:x.rindex('"')])
         
     file.close
-def handleText():
+def handle_text():
 
     file_address = 'common_list.txt'
     file = open(file_address,'r',encoding='utf-8')
@@ -163,4 +163,53 @@ def handleCL2():
     #        if x == '\n': break
     #        print(x[x.index('.')+2:x.index('-')])
     file.close()
+def to_handle_author():
+    global f, authors
+    file_address = 'common_list.txt'
+    file = open(file_address,'r',encoding='utf-8')
+    new_file = open('common_author.txt','w',encoding='utf-8')
+    f = file.readlines()
+    i = 0
+    authors = []
+    while (i < len(f)-1):
+        #print(f[i][f[i].index('(')+1:f[i].rindex('')])
+        if (i < 130):
+            authors.append(f[i][f[i].index('(')+1:f[i].rindex('')])
+            print(authors[i][0:authors[i].index(')')])
+        else:
+            try:
+                authors.append(f[i][f[i].index('-')+2:f[i].rindex('')])
+                print(authors[i][0:authors[i].index('(')])
+            except ValueError:
+                #f[i] += '(f)'
+                #authors.append(f[i][f[i].index('-')+2:f[i].rindex('')])
+                #print(authors[i][0:authors[i].index('(')])
+                if (')' in f[i]):
+                    authors.append(f[i][f[i].index('-')+2:])            
+                else:
+                    authors.append(f[i][f[i].index('-')+2:]+'(f)')
+                print(authors[i][:authors[i].index('(')])
+        i += 1
+def to_handle_18():
+    global f, authors
+    file_address = '2018.txt'
+    handled_file = open(file_address,'r',encoding='utf-8')
+    file_list = handled_file.readlines()
+    authors = []
+    i = 0
+    for x in file_list:
+        if x == '\n': break
+        print(x)
+        if (')' in x):
+            authors.append(x[x.index('-')+2:])            
+        else:
+            authors.append(x[x.index('-')+2:]+'(f)')
+        print(authors[i][:authors[i].index('(')])
+        
+        i += 1
+        
+    
+    
+        
+    
     
