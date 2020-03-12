@@ -38,12 +38,13 @@ def to_handle_author():
     file.close()
     new_file.close()
 def to_handle_00():
-    global authors, x, texts, years
+    global authors, x, texts, years, error_count, authors2
     file_address = '2000-2014.txt'
     file = open(file_address,'r',encoding='utf-8')
     file_list = file.readlines()
     years = []
-    authors = []
+    authors = [[],[],[],[]]
+    authors2 = []
     texts = [[],[],[],[]]
     for x in file_list:
         if x.startswith('20'): years.append(x)
@@ -51,10 +52,14 @@ def to_handle_00():
     show_list(years)
     
     i = 0
+    error_count = 0
     for x in file_list:
-        try: authors.append(x[x.index('.')+1:x.index('"')].strip())
-        except ValueError: continue
-        i += 1
+        try:authors[i].append(x[x.index('.')+1:x.index('"')].strip())
+        except ValueError:
+            error_count += 1;
+            if error_count in (4,7,10): i += 1
+            continue
+        
 
     show_list(authors)
 
