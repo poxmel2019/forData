@@ -37,6 +37,7 @@ def to_handle_author():
         i += 1
     file.close()
     new_file.close()
+    
 def to_handle_00():
     global authors, x, texts, years, error_count, authors2
     file_address = '2000-2014.txt'
@@ -46,6 +47,18 @@ def to_handle_00():
     authors = [[],[],[],[]]
     authors2 = []
     texts = [[],[],[],[]]
+    texts2 = []
+
+    error_count = 0
+    i = 0
+    for x in file_list:
+        try:texts2[i].append(x[x.index('"')+1:x.index('"')].strip())
+        except ValueError:
+            error_count += 1;
+            if error_count in (4,7,10): i += 1
+            continue
+
+    show_list(texts)
     for x in file_list:
         if x.startswith('20'): years.append(x)
 
@@ -62,6 +75,9 @@ def to_handle_00():
         
 
     show_list(authors)
+
+    
+    
 
 def show_list(some_list):
     for x in some_list:
