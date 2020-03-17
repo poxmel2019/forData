@@ -95,61 +95,67 @@ def to_handle_00():
 
 def handle15():
 
-    global x, authors
+    global text, texts, x, y, authors, texts
     file_address = '2015.txt'
+    
     handled_file = open(file_address,'r',encoding='utf-8')
     file_list = handled_file.readlines()
 
     authors = []
+    texts = []
+    text = []
+    text_string = ''
 
+    # Append authors
     for x in file_list:
         if x == '(303)\n':break
         try:
             authors.append(x[x.index(')')+1:x.index('"')].strip())
         except ValueError:
             continue
-        print(x)
-    
-    show_list(authors)
+        #print(x)
 
-def to_handle_string():
-
-    global string, quotes_pos, txts, odd, even, j, i
-    string = '1) Антон Чехов "Который из трёх","Попрыгунья", "Хороший конец", "Один из многих", "Счастье", "Доктор", "Мститель", "Беглец", "У знакомых", "Интриги", "Ионыч"'
+    # Append texts
     i = 0
+    for y in file_list:
+        if y == '(303)\n': break
+        if i >= 3:
+            if '"' in y:
+                text = to_handle_string(y)
+                texts.append(text)
+           
+        
+        i += 1
+    show_list(authors)
+    show_list(texts)
+def to_handle_string(string):
+
+    #global j, quotes_pos, txts, odd, even, x, k, z
     quotes_pos = []
     txts = []
-    for x in string:
-        if x == '"': quotes_pos.append(i)
-        i += 1
-    print(quotes_pos)
-    
-
-    j = 0
+    k = 0
+    for z in string:
+        if z == '"':
+            quotes_pos.append(k)            
+        k += 1
+   
     odd = []
     even = []
     
-    for x in quotes_pos:
-        if j % 2 == 0:
-            odd.append(x)
-        else:
-            even.append(x)
-        j += 1
-
-    print(odd)
-    print(even)
-
     j = 0
-    for x in range(0,len(odd)):
-        txts.append(string[odd[j]+1:even[j]])
+    for z in quotes_pos:
+        if j % 2 == 0:
+            odd.append(quotes_pos[j])
+        else:
+            even.append(quotes_pos[j])
         j += 1
-
-    print(txts)
         
-   
-        
+    i = 0
+    for z in range(0,len(odd)):
+        txts.append(string[odd[i]+1:even[i]])
+        i += 1
 
-
+    return txts
 
 def show_list(some_list):
     for x in some_list:
