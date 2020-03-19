@@ -58,9 +58,9 @@ def to_handle_00():
     file = open(file_address,'r',encoding='utf-8')
     file_list = file.readlines()
     years = []
-    authors = [[],[],[],[]]
+    authors = []
     authors2 = []
-    texts = [[],[],[],[]]
+    texts = []
     texts2 = []
 
     error_count = 0
@@ -106,6 +106,8 @@ def handle15():
     text = []
     text_string = ''
 
+    authors_texts = []
+
     # Append authors
     for x in file_list:
         if x == '(303)\n':break
@@ -117,17 +119,20 @@ def handle15():
 
     # Append texts
     i = 0
+    j = 0
     for y in file_list:
         if y == '(303)\n': break
         if i >= 3:
             if '"' in y:
                 text = to_handle_string(y)
                 texts.append(text)
-           
+                authors_texts.append(authors[j])
+                j += 1
         
         i += 1
-    show_list(authors)
-    show_list(texts)
+    #show_list(authors)
+    #show_list(texts)
+    show_list(authors_texts)
 def to_handle_string(string):
 
     #global j, quotes_pos, txts, odd, even, x, k, z
@@ -160,9 +165,114 @@ def to_handle_string(string):
 def show_list(some_list):
     for x in some_list:
         print(x)
+def f15():
+    
+    #file_address = '2015.txt'
+    
+    handled_file = open(file_address,'r',encoding='utf-8')
+    file_list = handled_file.readlines()
+
+    texts = []
+    authors = []
+    text = []
+    texts2 = []
+    authors2 = []
+    years = []
+
+    i = 0
+ 
+    for x in file_list:
+        
+        if x == '(303)\n': break
+        if i >= 3:
+            if '"' in x:
+                text = to_handle_string(x)
+                added_author = x[x.index(')')+1:x.index('"')].strip()
+                for y in text:
+                    texts2.append(y)
+                    authors2.append(added_author)
+                    
+                authors.append(added_author)
+                texts.append(text)
+                years.append('2015')
+                
+                
+        i += 1
+def handle1214():
+
+    file_addresses = ['2000-2011.txt','2012.txt','2013.txt','2014.txt']
+    #handled_file = open(file_addresses[3],'r',encoding='utf-8')
+    #file_list = handled_file.readlines()
+
+    years = []
+    authors = []
+    texts = []
+   
+    data_list = []
+
+    i = 0
+    for x in range(i,len(file_addresses)):
+        handled_file = open(file_addresses[i],'r',encoding='utf-8')
+        file_list = handled_file.readlines()
+        handled_file.close()
+        data_list = handle_fl(file_list)
+        j = 0
+        for x in data_list:
+            for y in x:
+                if j == 0: texts.append(y)
+                elif j == 1: authors.append(y)
+                elif j == 2: years.append(y)
+            j += 1
+            
+        
+        i += 1
+
+    data_list = [texts,authors,years]
+
+    return data_list     
+        
+
+def handle_fl(file_list):
+
+    authors = []
+    authors2 = []
+    texts = []
+    texts2 = []
+    text = []
+    years = []
+    years2 = []
+    i = 0
+    year = None
+    for x in file_list:
+        if i == 0:
+            year = x
+            years.append(year.lstrip('\n'))
+        if '"' in x:
+            added_author = x[x.index('.')+2:x.index('"')].strip()
+            authors.append(added_author)
+            text = to_handle_string(x)
+            for y in text:
+                texts2.append(y)
+                years2.append(year[:len(year)-1])
+                authors2.append(added_author)
+            texts.append(text)
+        i += 1
+
+    data_list = [texts2,authors2,years2]
+    return data_list
+    
+  
+    
+    
+
+
 
     
-        
+
+
+
+
+    
     
 
 

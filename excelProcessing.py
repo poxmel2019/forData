@@ -2,6 +2,7 @@ from openpyxl import load_workbook
 from openpyxl import Workbook
 # Import relevant modules fomr `openpyxl.utils`
 from openpyxl.utils import get_column_letter, column_index_from_string
+from textProcessing import to_handle_string, f15, handle1214
 
 def f():
     # open workbook
@@ -149,6 +150,91 @@ def f3():
 
     year_file.close()
     wb.save('D:\\mySpreadsheets\\books.xlsx')
+def f15():
+    
+    file_address = '2015.txt'
+    
+    handled_file = open(file_address,'r',encoding='utf-8')
+    file_list = handled_file.readlines()
+
+    texts = []
+    authors = []
+    text = []
+    texts2 = []
+    authors2 = []
+    years = []
+    years2 = []
+
+    i = 0
+ 
+    for x in file_list:
+        
+        if x == '(303)\n': break
+        if i >= 3:
+            if '"' in x:
+                text = to_handle_string(x)
+                added_author = x[x.index(')')+1:x.index('"')].strip()
+                for y in text:
+                    texts2.append(y)
+                    authors2.append(added_author)
+                    years2.append('2015')
+                authors.append(added_author)
+                texts.append(text)
+                years.append('2015')
+                
+                
+        i += 1
+
+    handled_file.close()
+
+    wb = load_workbook('Books.xlsx')
+    sheet = wb['Лист1']
+
+    
+
+    i = 4
+    j = 3
+    k = 0
+    used_list = texts2
+    
+    for item in range(k,3):
+        for x in range(i,len(used_list)+4):
+            sheet.cell(row=i,column=j).value = used_list[i-4]
+            i += 1
+        k += 1
+        j += 1
+        i = 4
+        if k == 1: used_list = authors2
+        elif k == 2: used_list = years2
+        
+    
+
+    wb.save('Books.xlsx')
+
+def ff():
+
+    data_list = handle1214()
+
+    wb = load_workbook('Books.xlsx')
+    sheet = wb['Лист1']
+
+    k = 0
+    q = 0
+    i = 4
+    j = 3
+    used_list = data_list[k]
+    for item in range(k,3):
+        for x in range(i,len(used_list)+4):
+            sheet.cell(row=i,column=j).value = used_list[i-4]
+            i += 1
+        k += 1
+        if k == 3: break
+        used_list = data_list[k]
+        j += 1
+        i = 4
+
+    wb.save('Books.xlsx')
+       
     
         
 
