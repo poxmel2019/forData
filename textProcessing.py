@@ -51,88 +51,6 @@ def to_handle_author():
     years_file.close()
 
     show_list(years)
-    
-def to_handle_00():
-    global authors, x, texts, years, error_count, authors2
-    file_address = '2000-2014.txt'
-    file = open(file_address,'r',encoding='utf-8')
-    file_list = file.readlines()
-    years = []
-    authors = []
-    authors2 = []
-    texts = []
-    texts2 = []
-
-    error_count = 0
-    i = 0
-
-    for x in file_list:
-        try:
-            texts2.append(x[x.index('"'):x.index('",')])
-        except ValueError:
-            try:
-                texts2.append(x[x.index('"'):x.rindex('"')])
-            except ValueError:
-                continue
-
-    show_list(texts2)
-    for x in file_list:
-        if x.startswith('20'): years.append(x)
-
-    #show_list(years)
-    
-    i = 0
-    error_count = 0
-    for x in file_list:
-        try:authors[i].append(x[x.index('.')+1:x.index('"')].strip())
-        except ValueError:
-            error_count += 1;
-            if error_count in (4,7,10): i += 1
-            continue
-        
-
-    show_list(authors)
-
-def handle15():
-
-    global text, texts, x, y, authors, texts
-    file_address = '2015.txt'
-    
-    handled_file = open(file_address,'r',encoding='utf-8')
-    file_list = handled_file.readlines()
-
-    authors = []
-    texts = []
-    text = []
-    text_string = ''
-
-    authors_texts = []
-
-    # Append authors
-    for x in file_list:
-        if x == '(303)\n':break
-        try:
-            authors.append(x[x.index(')')+1:x.index('"')].strip())
-        except ValueError:
-            continue
-        #print(x)
-
-    # Append texts
-    i = 0
-    j = 0
-    for y in file_list:
-        if y == '(303)\n': break
-        if i >= 3:
-            if '"' in y:
-                text = to_handle_string(y)
-                texts.append(text)
-                authors_texts.append(authors[j])
-                j += 1
-        
-        i += 1
-    #show_list(authors)
-    #show_list(texts)
-    show_list(authors_texts)
 def to_handle_string(string):
 
     #global j, quotes_pos, txts, odd, even, x, k, z
@@ -260,8 +178,31 @@ def handle_fl(file_list):
 
     data_list = [texts2,authors2,years2]
     return data_list
+
+def genre():
+
     
-  
+    handled_file = open('2015.txt','r',encoding='utf-8')
+    file_list = handled_file.readlines()
+    nf = 0
+    f = 0
+    genre_list = []
+    genr = 'художка'
+    for x in file_list:
+        if x == '\n': break
+        if '(nf' in x: print(x); nf += 1; genr = 'нон-фикшн'
+        else: f += 1; genr = 'художка'
+        genre_list.append(genr)
+
+        
+       
+            
+
+    print(nf)
+    print(f)
+    for x in genre_list:print(x)
+    handled_file.close()
+    
     
     
 

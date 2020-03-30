@@ -234,6 +234,42 @@ def ff():
         i = 4
 
     wb.save('Books.xlsx')
+
+def fq():
+    global wb, sheet, k, texts, authors
+    wb = load_workbook('Books.xlsx')
+    sheet = wb['Лист1']
+    sheet2 = wb['Лист3']
+    texts = []
+    authors = []
+
+    i = 4
+    col = 3
+    for x in range(i,666):
+        added_value = sheet.cell(row=i,column=col).value
+        sheet2.cell(row=i,column=3).value = added_value
+        print(added_value)
+        texts.append(added_value)
+        i += 1
+
+    j = 4
+    for x in range(j,666):
+        added_value = sheet.cell(row=j,column=4).value
+        sheet2.cell(row=j,column=4).value = added_value
+        print(added_value)
+        authors.append(added_value)
+        j += 1
+
+    #
+    #k = 4
+    #for x in range(k,666):
+    #    sheet2.cell(row=k,column=3).value = texts[k-4]
+    #    k += 1
+    
+    wb.save('Books.xlsx')
+        
+        
+               
        
     
         
