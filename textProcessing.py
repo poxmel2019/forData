@@ -16,7 +16,7 @@ def to_handle_text():
     file.close()
 def to_handle_author():
     
-    global f, authors, years
+  
     file_address = 'common_list.txt'
     file = open(file_address,'r',encoding='utf-8')
     new_file = open('common_author.txt','w',encoding='utf-8')
@@ -53,7 +53,7 @@ def to_handle_author():
     show_list(years)
 def to_handle_string(string):
 
-    #global j, quotes_pos, txts, odd, even, x, k, z
+   
     quotes_pos = []
     txts = []
     k = 0
@@ -85,7 +85,7 @@ def show_list(some_list):
         print(x)
 def f15():
     
-    #file_address = '2015.txt'
+   
     
     handled_file = open(file_address,'r',encoding='utf-8')
     file_list = handled_file.readlines()
@@ -181,30 +181,49 @@ def handle_fl(file_list):
 
 def genre():
 
-    
-    handled_file = open('2015.txt','r',encoding='utf-8')
-    file_list = handled_file.readlines()
-    nf = 0
-    f = 0
+   
+    file_addresses = ['2016.txt','2017.txt','2018.txt']
+    i = 0
     genre_list = []
+    f = nf = 0
     genr = 'художка'
+    for x in range(i,3):
+        handle_genre(file_addresses[i],genre_list)
+        i += 1
+
+    return genre_list
+        
+    
+def handle_genre(file_address, genre_list):
+
+    handled_file = open(file_address,'r',encoding='utf-8')
+    file_list = handled_file.readlines()
     for x in file_list:
         if x == '\n': break
-        if '(nf' in x: print(x); nf += 1; genr = 'нон-фикшн'
-        else: f += 1; genr = 'художка'
-        genre_list.append(genr)
-
-        
-       
-            
-
-    print(nf)
-    print(f)
-    for x in genre_list:print(x)
+        if '(nf' in x: genre_list.append('нон-фикшн')
+        else: genre_list.append('художка')
     handled_file.close()
+
+def genre15():
+
+    handled_file = open('2015.txt','r',encoding='utf-8')
+    texts = []
+    authors = []
     
+    nf = 0
+    file_list = handled_file.readlines()
+    for x in file_list:
+        if x == '(303)\n': break
+        if '(nf' in x:
+            nf += 1
+            texts.append(x[x.index('"')+1:x.rindex('"')])
+            
+    #for x in texts: print(x)
+    #print(nf)
+
+    return texts
     
-    
+        
 
 
 

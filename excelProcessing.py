@@ -2,7 +2,8 @@ from openpyxl import load_workbook
 from openpyxl import Workbook
 # Import relevant modules fomr `openpyxl.utils`
 from openpyxl.utils import get_column_letter, column_index_from_string
-from textProcessing import to_handle_string, f15, handle1214
+from textProcessing import to_handle_string, f15, handle1214, \
+genre, handle_genre, genre15
 
 def f():
     # open workbook
@@ -59,7 +60,7 @@ def f():
 
 def f1():
     # D:\mySpreadsheets
-    global i, j, texts
+   
     wb = load_workbook('D:\\mySpreadsheets\\books.xlsx')
     sheet = wb['Лист1']
     needed_cell = sheet['C53']
@@ -104,7 +105,7 @@ def f():
     ws.cell(row=2)
 def f2():
 
-    global i, j, authors_list
+    
     texts = open('common_text.txt','r',encoding='utf-8')
     authors = open('common_author.txt','r',encoding='utf-8')
     texts_list = texts.readlines()
@@ -130,7 +131,7 @@ def f2():
 
 def f3():
 
-    global years_list
+    
     year_file = open('common_year.txt','r')
     years_list = year_file.readlines()
 
@@ -236,7 +237,7 @@ def ff():
     wb.save('Books.xlsx')
 
 def fq():
-    global wb, sheet, k, texts, authors
+   
     wb = load_workbook('Books.xlsx')
     sheet = wb['Лист1']
     sheet2 = wb['Лист3']
@@ -266,6 +267,38 @@ def fq():
     #    sheet2.cell(row=k,column=3).value = texts[k-4]
     #    k += 1
     
+    wb.save('Books.xlsx')
+
+def fq1():
+
+    genre_list = genre()
+    
+    wb = load_workbook('Books.xlsx')
+    sheet = wb['Лист3']
+    j = 0
+    string = 378
+    for x in range(string,666):
+        sheet.cell(row=string,column=5).value = genre_list[string-378]
+        string += 1
+    wb.save('Books.xlsx')
+
+def fq2():
+
+    wb = load_workbook('Books.xlsx')
+    sheet = wb['Лист3']
+    i = 4
+    for i in range(i,378):
+        sheet.cell(row=i,column=5).value = 'художка'
+
+    texts = genre15()
+    string = 77
+    j = 0
+    for x in range(77,378):
+        if (sheet.cell(row=string,column=3).value in texts):
+            sheet.cell(row=string,column=5).value = 'нон-фикшн'
+        
+        string += 1
+        
     wb.save('Books.xlsx')
         
         
